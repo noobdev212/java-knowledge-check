@@ -16,7 +16,7 @@ public class Quiz {
   }
 
   public void addQuestion(String question, String term) {
-    if (!corpus.terms().containsKey(term)) {
+    if (!corpus.terms().containsKey(term) || question.equals("")) {
       throw new IllegalArgumentException("Expected term to exist in corpus: " + term);
     }
 
@@ -31,7 +31,10 @@ public class Quiz {
   }
 
   public void addTerm(String term, String definition) {
-    corpus.terms().put(term, new Pair<>(corpus.terms().size(), definition));
+    if (corpus.terms().containsKey(term) || definition.equals("")) {
+      throw new IllegalArgumentException("Expected valid and unique term: " + term);
+    }
+    corpus.addTerms(term, definition);
   }
 
   public String getDefinition(String term) {
@@ -39,6 +42,21 @@ public class Quiz {
       throw new IllegalArgumentException("Expected term to exist in corpus: " + term);
     }
 
-    return corpus.terms().get(term).getValue();
+    return corpus.terms().get(term);
+  }
+
+  public List<String> getSimilarTerm(String term, int count) {
+    if (corpus.terms().size() < count || count <= 0) {
+      throw new IndexOutOfBoundsException("request count for similar terms far exceeds the given list");
+    }
+
+    List<Pair<Double, String>> ranks = corpus.getRanks(term);
+    List<String> similar = new ArrayList<>();
+
+    for (int index = 0; index < count; index++) {
+      similar.add(ranks.get(index).getValue());
+    }
+
+    return similar;
   }
 }
