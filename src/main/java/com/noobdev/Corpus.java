@@ -14,8 +14,29 @@ public record Corpus(
   List<String> definitions,
   BiFunction<String, String, Double> compute
 ) {
+
   public Corpus() {
     this(new HashMap<>(), new HashMap<>(), new ArrayList<>(), NLP::nGram);
+  }
+
+  // instantiate using config from YAML, expects terms and definitions keys
+  public Corpus(Map<String, Object> config) {
+    if (!config.containsKey("terms") || !config.containsKey("definitions")) {
+      throw new IllegalArgumentException("Expected config to match corpus: " + config);
+    }
+
+    Map<String, String> _terms = new HashMap<>();
+    List<String> _definitions = new ArrayList<>();
+    List<String> _cterms = (ArrayList<String>)config.get("terms");
+    List<String> _cdefinitions = (ArrayList<String>)config.get("definitions");
+    for (int index = 0; index < _cterms.size(); index++) {
+      _terms.put(_cterms.get(index), _cdefinitions.get(index));
+      _definitions.add(_cdefinitions.get(index));
+    }
+
+    System.out.println(_terms);
+    System.out.println(_definitions);
+    this(_terms, new HashMap<>(), _definitions, NLP::nGram);
   }
 
   public void addTerms(String term, String definition) {

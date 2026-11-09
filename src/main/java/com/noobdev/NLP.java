@@ -7,6 +7,9 @@ import java.util.Map;
 
 public final class NLP {
 
+  private NLP() {
+  }
+
   private static void nGramsMerge(
     ArrayDeque<String> grams,
     HashMap<String, Double> score,
@@ -52,7 +55,6 @@ public final class NLP {
 
     ArrayDeque<String> grams = new ArrayDeque<>();
 
-    System.out.println("---------------");
     for (String word: word1.split("\\s+")) {
       if (!scoreA.containsKey(word)) {
         scoreA.put(word, 0d);
@@ -98,8 +100,6 @@ public final class NLP {
     // scale uniqueA by 2 to skew the result on favor of word A
     distance = Math.abs(2d*uniqueA - uniqueB);
     score = 1d - (duplicate / distance); // 0.01d in case if both words have nothing in common
-    System.out.println(word1 + " : " + word2);
-    System.out.println(score);
     return score;
   }
 }
