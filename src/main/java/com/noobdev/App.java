@@ -14,6 +14,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.control.Button;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -59,12 +60,20 @@ public class App extends Application
       a, b, c, d
     );
 
+    quiz.dumpData("test2.yaml");
+    phase(stage);
+
     box.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
     root.getChildren().add(box);
     root.setAlignment(Pos.CENTER);
     Scene scene = new Scene(root, 640, 350);
     stage.setScene(scene);
     stage.show();
+  }
+
+  private void phase(Stage stage) {
+    Quiz quiz = new Quiz("test2.yaml");
+    System.out.println(quiz);
   }
 
   public static void main(String[] args) {
