@@ -34,9 +34,10 @@ public record Corpus(
       _definitions.add(_cdefinitions.get(index));
     }
 
-    System.out.println(_terms);
-    System.out.println(_definitions);
     this(_terms, new HashMap<>(), _definitions, NLP::nGram);
+    for (Map.Entry<String, String> ent : _terms.entrySet()) {
+      addTerms(ent.getKey(), ent.getValue());
+    }
   }
 
   public void addTerms(String term, String definition) {
