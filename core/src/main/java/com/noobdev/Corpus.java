@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.stream.IntStream;
 import java.util.List;
 import java.util.ArrayList;
-import javafx.util.Pair;
 import java.util.function.BiFunction;
 
 public record Corpus(
@@ -75,7 +74,7 @@ public record Corpus(
       sorted.add(new Pair<>(ent.getValue().get(index), ent.getKey()));
     }
 
-    sorted.sort((p1, p2) -> p2.getKey().compareTo(p1.getKey()));
+    sorted.sort((p1, p2) -> p2.first().compareTo(p1.first()));
     return sorted;
   }
 }
