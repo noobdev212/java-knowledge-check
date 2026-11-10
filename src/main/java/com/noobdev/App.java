@@ -32,7 +32,17 @@ public class App extends Application
   public void start(Stage stage) {
     String []questions = {
       "Who created c++?",
-      "it's a form"
+      "it's a form",
+      "it's a form",
+      "it's a form",
+      "it's a form",
+      "it's a form",
+      "it's a form",
+      "it's a form",
+      "it's a form",
+      "it's a form",
+      "it's a form",
+      "Testing the longest text ever so don't sweat it like sweating it, I like turtles alright then. So how is your weekend, Great? alright so when would this finish. I don't know I haven't written any restriction for text length so I have the freedom with no free will."
     };
 
     List<String> sheet = new ArrayList<>(Collections.nCopies(questions.length, ""));
@@ -99,11 +109,7 @@ public class App extends Application
 
   private static void initQuestion() {
     try {
-      quiz.addTerm("Guido Van Rossum", "creator of python a programming language");
-      quiz.addTerm("Bjarne Stroustrup", "creator of c++ a programming language");
-      quiz.addTerm("Roberto Lerusalimschy", "creator of lua a programming language");
-      quiz.addTerm("James Gosling", "creator of java a programming language");
-      quiz.addQuestion("Who created c++?", "Bjarne Stroustrup");
+      quiz.addQuestion("Testing the longest text ever so don't sweat it like sweating it, I like turtles alright then. So how is your weekend, Great? alright so when would this finish. I don't know I haven't written any restriction for text length so I have the freedom with no free will.", "Bjarne Stroustrup");
       quiz.dumpData("default.yaml");
     } catch (Exception e) {
       System.out.println("already initialized or terms have already existed");
