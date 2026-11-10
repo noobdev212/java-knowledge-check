@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.io.File;
 
 public final class Utility {
   private Utility() {}
@@ -42,5 +43,13 @@ public final class Utility {
     } catch(IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public static boolean resExist(String path) {
+    File res = new File(getRes() + "/" + path);
+    if (!res.exists()) {
+      return false;
+    }
+    return true;
   }
 }
