@@ -14,7 +14,7 @@ public final class Utility {
   private Utility() {}
 
   public static String getRes() {
-    String path = System.getProperty("user.dir") + "/res";
+    String path = System.getProperty("user.dir") + "/src/main/resources";
     try {
       Files.createDirectories(Paths.get(path));
     } catch(IOException e) {
