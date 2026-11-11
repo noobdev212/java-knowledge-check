@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<ScrollPane 
+  fx:id="rootPane"
+  xmlns="http://javafx.com/javafx" 
+  xmlns:fx="http://javafx.com/fxml" 
+  stylesheets="@../css/Style.css"
+  fx:controller="com.noobdev.QuizController"
+  fitToWidth="true"
+  styleClass="p-1"
+>
+  <content>
+    <VBox fx:id="content" styleClass="p-2" alignment="CENTER" spacing="16">
+      <children>
+        <VBox fx:id="questionPane" spacing="6"/>
+        <fx:include fx:id="submitBtn" source="FXMLSubmitBtn.fxml"/>
+      </children>
+    </VBox>
+  </content>
+</ScrollPane>

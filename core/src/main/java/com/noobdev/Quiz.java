@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
-import javafx.util.Pair;
 
 public class Quiz {
   private Map<String, String> questions;
@@ -71,7 +70,7 @@ public class Quiz {
     List<String> similar = new ArrayList<>();
 
     for (int index = 0; index < count; index++) {
-      similar.add(ranks.get(index).getValue());
+      similar.add(ranks.get(index).second());
     }
 
     return similar;
