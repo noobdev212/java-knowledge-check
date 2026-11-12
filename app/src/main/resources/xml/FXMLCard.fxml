@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+
+<HBox
+  fx:id="rootPane"
+  xmlns="http://javafx.com/javafx"
+  xmlns:fx="http://javafx.com/fxml"
+  stylesheets="@../css/Style.css"
+  styleClass="card"
+>
+  <children>
+    <VBox fx:id="content" styleClass="card-content">
+      <children>
+        <HBox fx:id="header" styleClass="card-header">
+          <children>
+            <Label fx:id="titleLbl" styleClass="card-title"/>
+          </children>
+        </HBox>
+        <Text fx:id="description" styleClass="card-description"/>
+        <fx:include fx:id="takeBtn" source="FXMLTakeBtn.fxml"/>
+      </children>
+    </VBox>
+  </children>
+</HBox>

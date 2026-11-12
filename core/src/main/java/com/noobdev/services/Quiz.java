@@ -5,30 +5,45 @@ import java.util.Map;
 import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Quiz {
   private Map<String, String> questions;
+  private String path;
   private Corpus corpus;
+  private String description;
 
-  public Quiz(Corpus corpus) {
-    questions = new HashMap<>();
-    this.corpus = corpus;
-  }
+  // may not be useful since path will auto create corpus
+  // public Quiz(Corpus corpus) {
+  //   questions = new HashMap<>();
+  //   this.corpus = corpus;
+  // }
 
   public Quiz(String path) {
-    Map<String, Object> config = Utility.readConfig(path);
-    if (!config.containsKey("questions") || !config.containsKey("answers")) {
-      throw new IllegalArgumentException("Failed to initialize Quiz using config: " + path);
-    }
-
+    this.path = path;
     questions = new HashMap<>();
-    List<String> keyQuestions = (ArrayList<String>)config.get("questions");
-    List<String> keyAnswers = (ArrayList<String>)config.get("answers");
-    for (int index = 0; index < keyQuestions.size(); index++) {
-      questions.put(keyQuestions.get(index), keyAnswers.get(index));
-    }
 
-    corpus = new Corpus(config);
+    // if config already existed
+    // populate questions from previous
+    // config
+    if (!Path.resExist(path)) {
+      corpus = new Corpus();
+    }
+    else {
+      Map<String, Object> config = Path.readConfig(path);
+      if (!config.containsKey("questions") || !config.containsKey("answers")) {
+        throw new IllegalArgumentException("Failed to initialize Quiz using config: " + path);
+      }
+
+      description = (String)config.get("description");
+      List<String> keyQuestions = (ArrayList<String>)config.get("questions");
+      List<String> keyAnswers = (ArrayList<String>)config.get("answers");
+      for (int index = 0; index < keyQuestions.size(); index++) {
+        questions.put(keyQuestions.get(index), keyAnswers.get(index));
+      }
+
+      corpus = new Corpus(config);
+    }
   }
 
   public void addQuestion(String question, String term) {
@@ -76,13 +91,22 @@ public class Quiz {
     return similar;
   }
 
-  public void dumpData(String path) {
+  public String[] getQuestions() {
+    return Arrays.stream(questions.keySet().toArray()).map(Object::toString).toArray(String[]::new);
+  }
+
+  public void dumpData() {
     Map<String, Object> payload = new HashMap<>();
     payload.put("terms", corpus.terms().keySet().toArray());
     payload.put("definitions", corpus.definitions());
     payload.put("questions", questions.keySet().toArray());
     payload.put("answers", questions.values().toArray());
-    Utility.writeConfig(path, payload);
+    payload.put("description", description);
+    Path.writeConfig(path, payload);
+  }
+
+  public String getDescription() {
+    return description;
   }
 
   @Override()

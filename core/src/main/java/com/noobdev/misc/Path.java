@@ -10,8 +10,8 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.io.File;
 
-public final class Utility {
-  private Utility() {}
+public final class Path {
+  private Path() {}
 
   public static String getRes() {
     String path = System.getProperty("user.dir") + "/src/main/resources";
@@ -43,6 +43,19 @@ public final class Utility {
     } catch(IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public static String[] listNodes(String path) {
+    try {
+      File dir = new File(path);
+      if (!dir.isDirectory()) {
+        throw new IOException("Expected path to be directory");
+      }
+      return dir.list();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   public static boolean resExist(String path) {
