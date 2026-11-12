@@ -53,7 +53,6 @@ public class QuestionController {
 
       Button optionBtn = (Button)FXMLLoader.load(getClass().getResource("/xml/FXMLOptionBtn.fxml"));
       optionBtn.setText(answers.get(index));
-      GridPane.setHgrow(optionBtn, Priority.ALWAYS);
 
       optionBtn.setOnAction(event -> {
         String prevAnswer = answerSheet.get(sheetNo);
@@ -70,6 +69,7 @@ public class QuestionController {
       });
 
       options.add(optionBtn);
+      GridPane.setHgrow(optionBtn, Priority.ALWAYS);
       optionPane.add(optionBtn, index%2, index/2);
     }
 
