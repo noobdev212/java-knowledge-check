@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+
+<Button
+  fx:id="takeBtn"
+  xmlns="http://javafx.com/javafx"
+  xmlns:fx="http://javafx.com/fxml"
+  stylesheets="@../css/Style.css"
+  styleClass="bg-color, tx-light, tx-1"
+  text="Take Assessment"
+/>
+

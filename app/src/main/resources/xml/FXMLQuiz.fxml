@@ -3,6 +3,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 
 <ScrollPane 
   fx:id="rootPane"
@@ -16,6 +17,7 @@
   <content>
     <VBox fx:id="content" styleClass="p-2" alignment="CENTER" spacing="16">
       <children>
+        <Label fx:id="quizTitle" styleClass="tx-2"/>
         <VBox fx:id="questionPane" spacing="6"/>
         <fx:include fx:id="submitBtn" source="FXMLSubmitBtn.fxml"/>
       </children>

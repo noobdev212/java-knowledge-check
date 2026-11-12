@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane
+  fx:id="rootPane"
+  xmlns="http://javafx.com/javafx"
+  xmlns:fx="http://javafx.com/fxml"
+  stylesheets="@../css/Style.css"
+  fx:controller="com.noobdev.CatalogController"
+  styleClass="pxy-1"
+>
+  <content>
+    <VBox fx:id="content" spacing="10">
+      <children>
+        <Label fx:id="title" text="Assessment Catalog" styleClass="tx-2"/>
+        <VBox fx:id="contentList"/>
+      </children>
+    </VBox>
+  </content>
+</ScrollPane>

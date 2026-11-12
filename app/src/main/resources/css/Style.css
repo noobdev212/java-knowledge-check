@@ -50,3 +50,41 @@
   -fx-background-radius: 5;
 }
 
+.card {
+    -fx-background-color: white;
+
+    -fx-border-color: #d5d9df;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+
+    -fx-background-radius: 8;
+
+    -fx-padding: 12;
+
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0,0,0,0.05),
+        4,
+        0,
+        0,
+        1
+    );
+}
+
+.card-content {
+    -fx-spacing: 8;
+}
+
+.card-header {
+    -fx-padding: 0 0 4 0;
+}
+
+.card-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222222;
+}
+
+.card-description {
+    -fx-fill: #666666;
+}

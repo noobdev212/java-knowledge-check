@@ -6,6 +6,6 @@
   xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@../css/Style.css"
   alignment="CENTER_LEFT"
   styleClass="p-2, hint-color"
-  maxWidth="100000"
   wrapText="true"
+  maxWidth="100000"
 />
