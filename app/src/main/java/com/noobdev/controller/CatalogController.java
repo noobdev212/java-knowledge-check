@@ -40,7 +40,7 @@ public class CatalogController {
 
     Button takeBtn = (Button)cardRoot.lookup("#takeBtn");
     takeBtn.setOnAction(event -> {
-      route.pushScene(new Scene(newRoot, 600, 500));
+      route.pushScene(newRoot);
     });
     return cardRoot;
   }

@@ -25,8 +25,7 @@ public class App extends Application
     CatalogController controller = loader.getController();
     controller.renderList(route);
 
-    Scene scene = new Scene(root, 600, 400);
-    route.pushScene(scene);
+    route.pushScene(root);
   }
 
   public static void main(String[] args) {
