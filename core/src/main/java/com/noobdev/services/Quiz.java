@@ -20,17 +20,17 @@ public class Quiz {
   // }
 
   public Quiz(String path) {
-    this.path = path;
+    this.path = "config/" + path + ".yaml";
     questions = new HashMap<>();
 
     // if config already existed
     // populate questions from previous
     // config
-    if (!Path.resExist(path)) {
+    if (!Path.resExist(this.path)) {
       corpus = new Corpus();
     }
     else {
-      Map<String, Object> config = Path.readConfig(path);
+      Map<String, Object> config = Path.readConfig(this.path);
       if (!config.containsKey("questions") || !config.containsKey("answers")) {
         throw new IllegalArgumentException("Failed to initialize Quiz using config: " + path);
       }
@@ -107,6 +107,10 @@ public class Quiz {
 
   public String getDescription() {
     return description;
+  }
+
+  public void setDescription(String desc) {
+    description = desc;
   }
 
   @Override()
