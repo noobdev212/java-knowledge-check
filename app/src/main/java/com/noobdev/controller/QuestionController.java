@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Collections;
 
-public class QuestionController {
+public class QuestionController implements Controller {
   private String answer;
   private String question;
   private List<String> answerSheet;
@@ -90,4 +90,7 @@ public class QuestionController {
 
     questionLbl.setText((sheetNo+1) + ". " + question);
   }
+
+  @Override
+  public void refresh() {}
 }
