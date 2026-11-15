@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+
+<VBox
+  fx:id="rootPane"
+  xmlns="http://javafx.com/javafx"
+  xmlns:fx="http://javafx.com/fxml"
+  stylesheets="@../css/Style.css"
+  fx:controller="com.noobdev.TermDialogController"
+>
+  <Label text="Add Your Options"/>
+  <Label text="Term"/>
+  <TextField fx:id="nameTF" promptText="your term is..."/>
+  <Label text="Definition"/>
+  <TextField fx:id="defTF" promptText="write your definition..."/>
+  <HBox spacing="10">
+    <Button fx:id="createBtn" text="Create" onAction="#addTerm"/>
+    <Button fx:id="cancelBtn" text="Cancel" onAction="#closeDialog"/>
+  </HBox>
+</VBox>
