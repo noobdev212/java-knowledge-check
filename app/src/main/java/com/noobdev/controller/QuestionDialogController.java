@@ -51,4 +51,12 @@ public class QuestionDialogController implements DialogController {
     answerTF.setText("");
   }
 
+  public void setQuestion(String question, String answer) {
+    questionTF.setText(question);
+    answerTF.setText(answer);
+    createBtn.setOnAction(event -> {
+      quiz.setQuestion(question, questionTF.getText(), answerTF.getText());
+      controller.refresh();
+    });
+  }
 }

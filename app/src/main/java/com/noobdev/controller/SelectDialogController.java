@@ -54,6 +54,7 @@ public class SelectDialogController implements DialogController {
 
   @FXML
   private void closeDialog() {
+    controller.refresh();
     cancelBtn.getScene().getWindow().hide();
   }
 

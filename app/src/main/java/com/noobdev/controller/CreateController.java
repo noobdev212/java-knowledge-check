@@ -1,6 +1,8 @@
 package com.noobdev;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -12,6 +14,15 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class CreateController implements Controller {
   @FXML
@@ -32,6 +43,7 @@ public class CreateController implements Controller {
   private VBox viewQuestionList;
 
   private Quiz quiz;
+  private Router route;
 
   public CreateController() {
   }
@@ -40,6 +52,7 @@ public class CreateController implements Controller {
     quiz = new Quiz(title);
     quiz.setDescription(description);
     quizTitle.setText(title);
+    this.route = route;
     quiz.dumpData();
 
     saveBtn.setOnAction(event -> {
@@ -70,6 +83,46 @@ public class CreateController implements Controller {
   }
 
   public void getQuizList() throws Exception {
+    String[] questions = quiz.getQuestions();
+    List<String> answerSheet = Arrays.stream(questions).map(q -> quiz.getAnswer(q)).collect(Collectors.toList());
+    List<StackPane> questionList = new ArrayList<>();
+
+    // populate option buttons to grid
+    for (int index = 0; index < questions.length; index++) {
+      final int i = index;
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/xml/FXMLQuestion.fxml"));
+
+      VBox root = (VBox)loader.load();
+      QuestionController control = loader.getController();
+      control.initQuiz(questions[index],
+          quiz.getAnswer(questions[index]),
+          index, answerSheet, quiz);
+      control.buildQuiz();
+      FXMLLoader icon = new FXMLLoader(getClass().getResource("/xml/FXMLEditIcon.fxml"));
+      Button editBtn = (Button)icon.load();
+      FXMLLoader load = new FXMLLoader(getClass().getResource("/xml/FXMLQuestionPop.fxml"));
+      Parent diag = load.load();
+
+      QuestionDialogController cont = load.getController();
+      Dialog<Void> dialog = new Dialog<>();
+      cont.initDialog(quiz, dialog, this);
+
+      dialog.initOwner(route.getStage());
+      editBtn.setOnAction(event -> {
+        cont.setQuestion(questions[i], quiz.getAnswer(questions[i]));
+        dialog.getDialogPane().setContent(diag);
+        dialog.showAndWait();
+      });
+
+      root.setMouseTransparent(true);
+      StackPane wrapper = new StackPane(root, editBtn);
+
+      StackPane.setAlignment(editBtn, Pos.TOP_RIGHT);
+      StackPane.setMargin(editBtn, new Insets(8));
+      questionList.add(wrapper);
+    }
+
+    viewQuestionList.getChildren().addAll(questionList);
   }
 
   public void addQuestion(String question, String answer) {
@@ -79,6 +132,7 @@ public class CreateController implements Controller {
   @Override
   public void refresh() {
     try {
+      viewQuestionList.getChildren().clear();
       getQuizList();
     } catch (Exception e) {
       e.printStackTrace();

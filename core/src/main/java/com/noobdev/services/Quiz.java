@@ -61,6 +61,15 @@ public class Quiz {
     return questions.get(question);
   }
 
+  public void setAnswer(String question, String answer) {
+    questions.put(question, answer);
+  }
+
+  public void setQuestion(String prevQuestion, String question, String answer) {
+    questions.remove(prevQuestion);
+    questions.put(question, answer);
+  }
+
   public void addTerm(String term, String definition) {
     if (corpus.terms().containsKey(term) || definition.equals("")) {
       throw new IllegalArgumentException("Expected valid and unique term: " + term);

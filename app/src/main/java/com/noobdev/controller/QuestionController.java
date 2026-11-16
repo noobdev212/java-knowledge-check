@@ -44,6 +44,18 @@ public class QuestionController implements Controller {
     this.answerSheet = answerSheet;
   }
 
+  private void selectBtn(Button optionBtn, List<Button> options, String answer) {
+    String prevAnswer = answerSheet.get(sheetNo);
+    // unselect previous pressed button
+    for (Button button: options) {
+      if (button.getText().equals(prevAnswer)) {
+        button.getStyleClass().remove("active-color");
+      }
+    }
+    answerSheet.set(sheetNo, answer);
+    optionBtn.getStyleClass().add("active-color");
+  }
+
   public void buildQuiz() throws Exception {
     List<String> answers = quiz.getSimilarTerm(answer, 4);
     List<Button> options = new ArrayList<>();
@@ -54,18 +66,12 @@ public class QuestionController implements Controller {
       Button optionBtn = (Button)FXMLLoader.load(getClass().getResource("/xml/FXMLOptionBtn.fxml"));
       optionBtn.setText(answers.get(index));
 
+
+      if (answerSheet.get(sheetNo).equals(answers.get(index))) {
+        selectBtn(optionBtn, options, answers.get(index)); // initial checking
+      }
       optionBtn.setOnAction(event -> {
-        String prevAnswer = answerSheet.get(sheetNo);
-        if (!prevAnswer.equals(optionBtn.getText())) {
-          // unselect previous pressed button
-          for (Button button: options) {
-            if (button.getText().equals(prevAnswer)) {
-              button.getStyleClass().remove("active-color");
-            }
-          }
-        }
-        answerSheet.set(sheetNo, answers.get(index));
-        optionBtn.getStyleClass().add("active-color");
+        selectBtn(optionBtn, options, answers.get(index));
       });
 
       options.add(optionBtn);
