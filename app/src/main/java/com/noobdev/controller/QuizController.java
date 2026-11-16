@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class QuizController {
+public class QuizController implements Controller {
   private List<String> answerSheet;
   private List<VBox> questionList;
   private Quiz quiz;
@@ -35,7 +35,7 @@ public class QuizController {
   public QuizController() {}
 
   public Quiz attachQuiz(String quizName, Router route) throws Exception {
-    quiz = new Quiz("config/" + quizName + ".yaml");
+    quiz = new Quiz(quizName);
     String[] questions = quiz.getQuestions();
     answerSheet = new ArrayList<>(Collections.nCopies(questions.length, ""));
     questionList = new ArrayList<>();
@@ -89,4 +89,7 @@ public class QuizController {
     questionPane.getChildren().addAll(questionList);
     return quiz;
   }
+
+  @Override
+  public void refresh() {}
 }

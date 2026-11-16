@@ -23,10 +23,10 @@ public class App extends Application
     ScrollPane root = loader.load();
 
     CatalogController controller = loader.getController();
-    controller.renderList(route);
+    controller.setRoute(route);
+    controller.renderList();
 
-    Scene scene = new Scene(root, 600, 400);
-    route.pushScene(scene);
+    route.pushScene(root, controller);
   }
 
   public static void main(String[] args) {

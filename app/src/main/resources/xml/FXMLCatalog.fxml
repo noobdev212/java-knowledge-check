@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 
 <ScrollPane
   fx:id="rootPane"
@@ -11,11 +13,22 @@
   stylesheets="@../css/Style.css"
   fx:controller="com.noobdev.CatalogController"
   styleClass="pxy-1"
+  fitToWidth="true"
 >
   <content>
     <VBox fx:id="content" spacing="10">
       <children>
-        <Label fx:id="title" text="Assessment Catalog" styleClass="tx-2"/>
+        <GridPane fx:id="header">
+          <columnConstraints>
+            <ColumnConstraints/>
+            <ColumnConstraints hgrow="ALWAYS"/>
+            <ColumnConstraints/>
+          </columnConstraints>
+          <children>
+            <Label fx:id="title" text="Assessment Catalog" styleClass="tx-2" GridPane.columnIndex="0"/>
+            <fx:include fx:id="createBtn" source="FXMLCreateBtn.fxml" GridPane.columnIndex="2"/>
+          </children>
+        </GridPane>
         <VBox fx:id="contentList"/>
       </children>
     </VBox>

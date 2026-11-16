@@ -2,27 +2,39 @@ package com.noobdev;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
+import javafx.scene.Parent;
 
 import java.util.Stack;
 
 public class Router {
-  private static Stack<Scene> scenes;
+  private static Stack<Parent> scenes;
+  private static Stack<Controller> controllers;
   private static Stage stage;
 
   public Router(Stage stage) {
     this.stage = stage;
     scenes = new Stack<>();
+    controllers = new Stack<>();
+    stage.setScene(new Scene(new VBox(0), 600, 400));
   }
 
-  public void pushScene(Scene scene) {
+  public void pushScene(Parent scene, Controller controllers) {
     scenes.push(scene);
+    this.controllers.push(controllers);
     renderScene();
   }
 
   public void popScene() {
     scenes.pop();
-    if (!scenes.isEmpty()) {
-      renderScene();
+    controllers.pop();
+    refresh();
+    renderScene();
+  }
+
+  public void refresh() {
+    if (!controllers.isEmpty()) {
+      controllers.peek().refresh();
     }
   }
 
@@ -31,7 +43,7 @@ public class Router {
   }
 
   public void renderScene() {
-    stage.setScene(scenes.peek());
+    stage.getScene().setRoot(scenes.peek());
     stage.show();
   }
 

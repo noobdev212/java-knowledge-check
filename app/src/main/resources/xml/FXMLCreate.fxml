@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+
+<ScrollPane 
+  fx:id="rootPane"
+  xmlns="http://javafx.com/javafx" 
+  xmlns:fx="http://javafx.com/fxml" 
+  stylesheets="@../css/Style.css"
+  fx:controller="com.noobdev.CreateController"
+  fitToWidth="true"
+  styleClass="p-1"
+>
+  <content>
+    <VBox fx:id="content" styleClass="p-2" alignment="CENTER" spacing="16">
+      <children>
+        <StackPane>
+          <children>
+            <Label fx:id="quizTitle" styleClass="tx-2"/>
+            <HBox alignment="CENTER_RIGHT" spacing="12">
+              <fx:include fx:id="saveBtn" source="FXMLSaveBtn.fxml" prefWidth="102"/>
+              <fx:include fx:id="cancelBtn" source="FXMLCancelBtn.fxml" prefWidth="102"/>
+            </HBox>
+          </children>
+        </StackPane>
+        <VBox fx:id="questionPane" spacing="6" fillWidth="true">
+          <VBox fx:id="viewQuestionList"/>
+          <Button fx:id="addBtn" prefWidth="Infinity">
+            <graphic>
+              <ImageView fitWidth="42" fitHeight="42">
+                <image>
+                  <Image url="@../image/add-icon.png"/>
+                </image>
+              </ImageView>
+            </graphic>
+          </Button>
+        </VBox>
+      </children>
+    </VBox>
+  </content>
+</ScrollPane>
